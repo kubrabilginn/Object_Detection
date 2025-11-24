@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>CNN Araç Tanıma Uygulaması (Staj Projesi)</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        input[type="file"] { margin-bottom: 20px; }
+        #preview { max-width: 100%; height: auto; margin-top: 15px; border: 1px solid #ccc; border-radius: 4px; display: none; }
+        #result { margin-top: 20px; padding: 15px; border-radius: 4px; border: 1px solid #dcdcdc; }
+        .success { color: green; font-weight: bold; }
+        .fail { color: red; font-weight: bold; }
+        .info { color: #555; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>CNN Araç Tanıma Testi</h1>
+    <p class="info">Model: Basit CNN | Cihaz: MPS Hızlandırması</p>
+    
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="uploadImage()" id="uploadButton">Tahmin Et</button>
+    
+    <img id="preview" alt="Yüklenecek Görüntü">
+
+    <div id="result">
+        <h2>Sonuçlar:</h2>
+        <p id="predictionText">Henüz tahmin yapılmadı.</p>
+        <p id="latencyText" class="info"></p>
+    </div>
+</div>
+
+<script>
+    const API_URL = 'http://127.0.0.1:5002/predict'; // Flask portu 5002
+    const imageInput = document.getElementById('imageInput');
+    const preview = document.getElementById('preview');
+    const predictionText = document.getElementById('predictionText');
+    const latencyText = document.getElementById('latencyText');
+    const uploadButton = document.getElementById('uploadButton');
+
+    // Dosya seçildiğinde önizleme
+    imageInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = 'block';
+            predictionText.className = '';
+            predictionText.textContent = 'Yeni görüntü yüklendi. Tahmin bekleniyor...';
+            latencyText.textContent = '';
+        }
+    });
+
+    function uploadImage() {
+        const file = imageInput.files[0];
+        if (!file) {
+            alert("Lütfen önce bir görüntü dosyası seçin.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        uploadButton.disabled = true;
+        predictionText.textContent = 'Tahmin yapılıyor... Lütfen bekleyin.';
+        predictionText.className = 'info';
+
+        fetch(API_URL, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            uploadButton.disabled = false;
+            if (data.error) {
+                predictionText.textContent = `HATA: ${data.error}`;
+                predictionText.className = 'fail';
+            } else {
+                predictionText.textContent = `Tahmin: ${data.prediction} (%${(data.confidence * 100).toFixed(2)} Güven)`;
+                latencyText.textContent = `İşlem Süresi (Gecikme): ${data.latency_ms} ms`;
+                
+                // Başarı rengini ayarla
+                if (data.prediction.includes("Araba")) {
+                    predictionText.className = 'success';
+                } else {
+                    predictionText.className = 'info';
+                }
+            }
+        })
+        .catch(error => {
+            uploadButton.disabled = false;
+            predictionText.textContent = 'Bağlantı Hatası: Sunucuya ulaşılamıyor (5002 portu).';
+            predictionText.className = 'fail';
+        });
+    }
+</script>
+</body>
+</html>
