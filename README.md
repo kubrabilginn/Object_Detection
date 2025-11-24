@@ -6,14 +6,18 @@ Proje, özellikle **PyTorch/Ultralytics üzerinde gerçekleştirilmiş olup, far
 
 ## 📊 Karşılaştırılan Algoritmalar
 
-Projede, aynı veri seti ve görev için üç ana kategoride model karşılaştırması yapılmıştır.
+Bu karşılaştırma tablosu, her algoritmanın eğitim süresini ve ulaştığı nihai performans metriklerini özetlemektedir.
 
-| Kategori | Algoritma | Görev | Temel Öznitelik | Genel Doğruluk (Accuracy/mAP) |
+| Algoritma | Görev | Eğitim Süresi | Metrik | Metrik Değeri |
 | :--- | :--- | :--- | :--- | :--- |
-| **Geleneksel ML (Feature Engineering)** | HOG + SVM | Sınıflandırma | El ile kodlanmış (HOG) | %71.0 |
-| **Geleneksel ML (Feature Engineering)** | HOG + KNN | Sınıflandırma | El ile kodlanmış (HOG) | %66.0 |
-| **Derin Öğrenme (Sınıflandırma)** | Basit CNN (PyTorch) | Sınıflandırma | Otomatik (Evrişimli Katmanlar) | **%85.0 (Accuracy)** |
-| **Derin Öğrenme (Nesne Tanıma)** | YOLOv8n (Ultralytics) | Nesne Tanıma & Konumlandırma | Otomatik (Tek Aşamalı Algılayıcı) | **%87.0 (mAP50)** |
+| **HOG + KNN** | Sınıflandırma | 0.02 saniye | Accuracy | %66.0 |
+| **HOG + SVM** | Sınıflandırma | 16.41 saniye | Accuracy | %71.0 |
+| **Basit CNN** | Sınıflandırma | **314.04 saniye** | Accuracy | **%85.0** |
+| **YOLOv8n (Nesne Tanıma)** | Nesne Tanıma & Konumlandırma | **1.855 saat** | mAP50 | **%9.08** |
+
+1.  **En Yüksek Başarı:** Sadece **sınıflandırma** görevi için en yüksek başarıyı (%85.0 Accuracy) Basit CNN modeli elde etmiştir.
+2.  **YOLOv8 Düşük mAP Değeri Analizi:** YOLOv8'in mAP50 değerinin (%9.08) bu kadar düşük olması beklenmediktir. Bunun temel nedenleri, kaynak kısıtlamaları nedeniyle eğitim süresinin **15 epoch** ile sınırlı kalması ve mAP'nin sadece doğru sınıfı değil, aynı zamanda doğru **konumu (Bounding Box)** da gerektiren çok daha zorlu bir metrik olmasıdır.
+3.  **Hız Farkı:** Geleneksel algoritmalar saniyeler içinde eğitilirken (Örn: HOG+SVM 16.41 saniye), Derin Öğrenme modelleri (CNN 314.04 saniye, YOLOv8 1.855 saat) çok daha fazla eğitim süresi gerektirmiştir.
 
 
 ## ✨ Proje Aşamaları
