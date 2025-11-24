@@ -1,0 +1,16 @@
+# stanford_cars.yaml
+
+# Sınıf sayısı
+nc: 1
+
+# Sınıf isimleri
+names: ['car']
+
+# Veri setinin ana yolu
+path: /Users/kub/Desktop/staj_projesi/data/stanford_cars/yolo_data
+
+# Eğitim görüntüleri yolu (YOLO_ROOT altındaki images/train)
+train: images/train 
+
+# Doğrulama görüntüleri yolu (YOLO_ROOT altındaki images/val)
+val: images/val
