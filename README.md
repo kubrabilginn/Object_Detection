@@ -1,6 +1,6 @@
 # 🚘 Derin Öğrenme ve Geleneksel ML Yöntemleriyle Araç Nesne Tanıma Karşılaştırması ve Flask API entegrasyonu
 
-Bu proje, **Stanford Cars Dataset** üzerinde hem geleneksel hem de modern derin öğrenme yaklaşımlarını kullanarak **Araç Nesne Tanıma** performansını karşılaştırmayı amaçlamaktadır. Proje, özellikle **Macbook M2 Air'in MPS (Metal Performance Shaders) hızlandırması** kullanılarak PyTorch ile optimize edilmiştir.
+Bu proje, **Stanford Cars Dataset** üzerinde hem geleneksel hem de modern derin öğrenme yaklaşımlarını kullanarak **Araç Nesne Tanıma** performansını karşılaştırmayı amaçlamaktadır. Proje, PyTorch ile optimize edilmiştir.
 
 Modelin pratik uygulanabilirliğini göstermek amacıyla, **Basit CNN** modeli **Flask** web sunucusu üzerinden bir API'ye dönüştürülmüştür.
 
