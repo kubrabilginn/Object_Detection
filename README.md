@@ -2,7 +2,7 @@
 
 Bu proje, **Stanford Cars Dataset** üzerinde, hem geleneksel makine öğrenimi tekniklerini hem de modern derin öğrenme yaklaşımlarını kullanarak araç nesne tanıma (Object Detection) performansını karşılaştırmayı amaçlamaktadır.
 
-Proje, özellikle **PyTorch/Ultralytics (Macbook M2 Air MPS hızlandırması ile)** üzerinde gerçekleştirilmiş olup, farklı algoritmaların eğitim süreleri ve doğruluk (Accuracy/mAP) metrikleri detaylı olarak analiz edilmiştir.
+Proje, özellikle **PyTorch/Ultralytics üzerinde gerçekleştirilmiş olup, farklı algoritmaların eğitim süreleri ve doğruluk (Accuracy/mAP) metrikleri detaylı olarak analiz edilmiştir.
 
 ## 📊 Karşılaştırılan Algoritmalar
 
