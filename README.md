@@ -18,8 +18,8 @@ Test edilen algoritmaların eğitim süreleri ve elde edilen doğruluk (Accuracy
 ### Sonuçların Yorumlanması
 
 1.  **En Yüksek Başarı (Sınıflandırma):** **Basit CNN** modeli, otomatik öznitelik çıkarımı sayesinde en yüksek doğruluk oranına (%85.0) ulaşmıştır.
-2.  **YOLOv8 Analizi:** YOLOv8'in mAP50 değerinin düşük çıkması (%9.08), **konumlandırma** gereksiniminden ve **kısa epoch** (15) sayısından kaynaklanmıştır. M2'de eğitim süresi $1.85$ saat olarak kaydedilmiştir.
-3.  **Geleneksel Yöntemler:** HOG öznitelikleri, SVM ile sınıflandırıldığında ($71\%$), hızlı bir temel başarı (baseline) sağlamıştır. 
+2.  **YOLOv8 Analizi:** YOLOv8'in mAP50 değerinin düşük çıkması (%9.08), **konumlandırma** gereksiniminden ve **kısa epoch** (15) sayısından kaynaklanmıştır. M2'de eğitim süresi 1.85 saat olarak kaydedilmiştir.
+3.  **Geleneksel Yöntemler:** HOG öznitelikleri, SVM ile sınıflandırıldığında (71\%), hızlı bir temel başarı (baseline) sağlamıştır. 
 
 ### Derin Öğrenme Teorisi
 * **Transfer Learning:** Proje, **fine-tuning** kavramının pratik uygulamasını ve model formatlarının (`.pt`, `.h5`) araştırılmasını kapsamıştır.
